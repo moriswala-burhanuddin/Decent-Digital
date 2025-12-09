@@ -2,14 +2,15 @@ import { ArrowLeft, ExternalLink, Calendar, Users, CheckCircle2, Target, Lightbu
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { projectsApi } from '../services/api';
 
 const projectsData: Record<string, any> = {
   ecommerce: {
     title: 'E-Commerce Platform',
     category: 'Web Development',
     image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
-    description: 'A modern e-commerce platform...',
-    fullDescription: 'Built a comprehensive e-commerce platform that increased client sales by 250%.',
+    description: 'A modern e-commerce platform with seamless checkout experience and inventory management.',
+    fullDescription: 'Built a comprehensive e-commerce platform that increased client sales by 250% through optimized UX and fast checkout flows.',
     client: 'Fashion Retailer',
     year: '2024',
     team: '4 developers, 1 designer',
@@ -19,19 +20,79 @@ const projectsData: Record<string, any> = {
     results: ['250% sales boost', 'Cart drop 40%'],
     live_url: '#'
   },
+  branding: {
+    title: 'Brand Identity Design',
+    category: 'Branding',
+    image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Complete brand identity including logo, color palette, and brand guidelines.',
+    fullDescription: 'Created a unique and memorable brand identity for a tech startup, setting them apart in a crowded market.',
+    client: 'Tech Startup',
+    year: '2023',
+    team: '2 Designers',
+    tags: ['Illustrator', 'Photoshop', 'Branding'],
+    challenges: ['Market differentiation', 'Consistent application'],
+    solutions: ['Distinctive color palette', 'Comprehensive guidelines'],
+    results: ['Brand recognition up 60%', 'Successful launch'],
+    live_url: '#'
+  },
+  social: {
+    title: 'Social Media Campaign',
+    category: 'Digital Marketing',
+    image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Comprehensive social media campaign that increased engagement by 250% in 3 months.',
+    fullDescription: 'Designed and executed a multi-channel social media strategy that significantly boosted brand awareness and engagement.',
+    client: 'Lifestyle Brand',
+    year: '2024',
+    team: '1 Strategist, 1 Content Creator',
+    tags: ['Instagram', 'Facebook', 'Strategy'],
+    challenges: ['Low engagement', 'Inconsistent posting'],
+    solutions: ['Content calendar', 'Interactive posts'],
+    results: ['250% engagement increase', '10k new followers'],
+    live_url: '#'
+  },
   restaurant: {
     title: 'Restaurant Website',
     category: 'Web Development',
     image: 'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=800',
-    description: 'Restaurant platform...',
-    fullDescription: 'Complete restaurant solution with ordering.',
+    description: 'Beautiful restaurant website with online ordering and reservation system.',
+    fullDescription: 'Complete restaurant solution with ordering and table reservation capabilities.',
     client: 'Fine Dining',
     year: '2024',
     team: '3 developers',
     tags: ['Vue', 'Stripe'],
-    challenges: ['Menu logic'],
-    solutions: ['UX flow'],
-    results: ['180% orders'],
+    challenges: ['Menu logic', 'Real-time reservations'],
+    solutions: ['Custom CMS', 'Booking integration'],
+    results: ['180% orders', 'Full bookings'],
+    live_url: '#'
+  },
+  mobile: {
+    title: 'Mobile App Design',
+    category: 'UI/UX Design',
+    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Intuitive mobile app design for a fitness tracking application with modern interface.',
+    fullDescription: 'User-centric mobile app design focusing on ease of use and motivational elements for fitness enthusiasts.',
+    client: 'HealthTech Company',
+    year: '2023',
+    team: '2 UI/UX Designers',
+    tags: ['Figma', 'Mobile', 'UI/UX'],
+    challenges: ['Complex data visualization', 'User retention'],
+    solutions: ['Simplified graphs', 'Gamification'],
+    results: ['4.8 App Store rating', 'High retention'],
+    live_url: '#'
+  },
+  seo: {
+    title: 'SEO Optimization',
+    category: 'Digital Marketing',
+    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Complete SEO overhaul resulting in 400% increase in organic traffic.',
+    fullDescription: 'Implemented a technical and content-focused SEO strategy that drove massive organic growth.',
+    client: 'E-commerce Store',
+    year: '2024',
+    team: '1 SEO Specialist',
+    tags: ['SEO', 'Analytics', 'Growth'],
+    challenges: ['Low organic ranking', 'Technical errors'],
+    solutions: ['Site audit', 'Content optimization'],
+    results: ['400% traffic increase', 'Top 3 rankings'],
     live_url: '#'
   }
 };
@@ -52,35 +113,28 @@ export default function ProjectsDetail() {
       return;
     }
 
-    // ✅ Fetch from Django
-    fetch(`http://127.0.0.1:8000/api/projects/${slug}/`)
-      .then(res => {
-        if (!res.ok) throw new Error("Not in Django");
-        return res.json();
-      })
+    // ✅ Fetch from Django via Service
+    projectsApi.getProjectById(slug)
       .then(django => {
         setData({
           title: django.title,
           category: django.category,
           description: django.description,
-          fullDescription: django.full_description,
-          client: django.client || 'Private Client',
-          year: django.year || '2024',
-          team: django.team || 'Internal Team',
+          fullDescription: (django as any).full_description,
+          client: (django as any).client || 'Private Client',
+          year: (django as any).year || '2024',
+          team: (django as any).team || 'Internal Team',
           tags: django.tags || [],
-          challenges: django.challenges || [],
-          solutions: django.solutions || [],
-          results: django.results || [],
-          image: django.image?.startsWith("http")
-            ? django.image
-            : `http://127.0.0.1:8000${django.image}`,
-          live_url: django.live_url || '#'
+          challenges: (django as any).challenges || [],
+          solutions: (django as any).solutions || [],
+          results: (django as any).results || [],
+          image: django.image,
+          live_url: (django as any).live_url || '#'
         });
       })
       .catch(err => {
-        console.error("Django fetch failed:", err.message);
-        // setData(projectsData['ecommerce']); // REMOVED: Don't show wrong data on error
-        setData(null); // Keep as null to show loading or error
+        console.error("Django fetch failed:", err);
+        setData(null);
       });
 
   }, [slug]);
