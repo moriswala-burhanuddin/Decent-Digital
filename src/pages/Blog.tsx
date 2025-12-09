@@ -106,7 +106,7 @@ export default function Blog() {
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse-slow" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] animate-pulse-slow animation-delay-2000" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[100px] animate-pulse-slow animation-delay-2000" />
         </div>
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
@@ -126,7 +126,7 @@ export default function Blog() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tight"
           >
-            Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Insights</span>
+            Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Insights</span>
           </motion.h1>
 
           <motion.p

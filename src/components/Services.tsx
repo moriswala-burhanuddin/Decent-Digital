@@ -84,12 +84,12 @@ function ServiceCard({ service, isActive }: { service: typeof services[0]; isAct
         transform: 'translateZ(0)',
       }}
     >
-      {/* Card Background - Light: Clean Glass, Dark: Deep Glass */}
-      <div className={`absolute inset-0 transition-colors duration-500
-        bg-white/80 dark:bg-slate-900/90 backdrop-blur-2xl
+      {/* Card Background - Optimized Glass */}
+      <div className="absolute inset-0 transition-colors duration-500
+        bg-white/90 dark:bg-slate-900/90
         border border-white/40 dark:border-white/10
         ${isActive ? 'border-t-white/60 dark:border-t-white/20' : ''}
-      `} />
+      " />
 
       {/* Dynamic Gradient Tint */}
       <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-[0.03] dark:opacity-[0.15] group-hover:opacity-[0.08] dark:group-hover:opacity-[0.25] transition-opacity duration-500`} />
@@ -157,17 +157,18 @@ export default function Services() {
       className="pt-16 pb-24 relative overflow-hidden bg-slate-50 dark:bg-black transition-colors duration-1000"
     >
       {/* Ambient Background Effects */}
+      {/* Ambient Background Effects - Optimized */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
 
         <AnimatePresence mode='wait'>
           <motion.div
             key={currentService.id}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.2 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[100px] opacity-20 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }} // Faster transition
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[3xl] opacity-20 dark:opacity-20 will-change-transform" // Reduced blur and opacity, hardware acceleration
             style={{ backgroundColor: currentService.color }}
           />
         </AnimatePresence>

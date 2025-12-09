@@ -82,13 +82,13 @@ export default function Testimonials() {
                         whileHover={{ scale: 1.05 }}
                     >
                         <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                        <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-sm font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                             Client Success Stories
                         </span>
                     </motion.div>
 
                     <h2 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
-                        Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Innovators</span>
+                        Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Innovators</span>
                     </h2>
 
                     <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">

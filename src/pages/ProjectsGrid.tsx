@@ -138,14 +138,14 @@ export default function ProjectsGrid() {
             whileHover={{ scale: 1.05 }}
           >
             <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-sm font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               All Projects
             </span>
           </motion.div>
 
           <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 transition-colors duration-300">
             Our Complete{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               Portfolio
             </span>
           </h1>
@@ -166,7 +166,7 @@ export default function ProjectsGrid() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 ${activeCategory === cat
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl shadow-blue-500/30 scale-105'
+                ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-xl shadow-primary/30 scale-105'
                 : 'bg-white/80 dark:bg-slate-800/60 backdrop-blur-md text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-700 hover:shadow-lg hover:scale-105 hover:border-blue-300/50 dark:hover:border-blue-500/50'
                 }`}
               whileHover={{ y: -2 }}

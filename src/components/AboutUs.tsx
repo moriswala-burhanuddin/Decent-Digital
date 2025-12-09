@@ -53,7 +53,7 @@ export default function AboutUs() {
                 About Decent Digital
               </div>
               <h2 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight">
-                We Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Digital Futures</span>
+                We Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Digital Futures</span>
               </h2>
             </div>
             <p className="text-xl text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
@@ -153,7 +153,7 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-[3rem] bg-gradient-to-r from-blue-600 to-purple-600 p-12 md:p-20 text-center text-white relative overflow-hidden"
+          className="rounded-[3rem] bg-gradient-to-r from-primary to-secondary p-12 md:p-20 text-center text-white relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
           <div className="relative z-10 max-w-3xl mx-auto">

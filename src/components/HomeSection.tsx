@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles, Palette, Code2, Layers, Megaphone, Briefcase, Globe, Zap } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { FigmaFrame } from "./FigmaFrame";
 import { VSCodeFrame } from "./VSCodeFrame";
 import { BrandingFrame } from "./BrandingFrame";
@@ -19,6 +20,7 @@ const services = [
 ];
 
 export function HomeSection() {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -41,36 +43,25 @@ export function HomeSection() {
         {/* Geometric Shapes */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 left-[10%] w-20 h-20 border-2 border-primary/20 rounded-2xl"
+          transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+          className="absolute top-20 left-[10%] w-20 h-20 border-2 border-primary/20 rounded-2xl opacity-20"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-40 right-[10%] w-32 h-32 border border-secondary/20 rounded-full"
-        />
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 right-[20%] w-4 h-4 bg-accent-purple/40 rounded-full blur-sm"
-        />
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/3 left-[15%] w-6 h-6 bg-primary/30 rotate-45 blur-sm"
+          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-40 right-[10%] w-32 h-32 border border-secondary/20 rounded-full opacity-20"
         />
 
+        {/* Optimized Blobs - Reduced blur and removed mix-blend-screen for performance */}
         <motion.div
           style={{ y }}
-          className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[80px] mix-blend-screen animate-blob will-change-transform"
+          className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[3xl] animate-pulse will-change-transform"
         />
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "30%"]) }}
-          className="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[80px] mix-blend-screen animate-blob animation-delay-2000 will-change-transform"
+        <div
+          className="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[3xl]"
         />
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "40%"]) }}
-          className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-accent-purple/10 rounded-full blur-[80px] mix-blend-screen animate-blob animation-delay-4000 will-change-transform"
+        <div
+          className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-accent-purple/5 rounded-full blur-[3xl]"
         />
       </div>
 
@@ -125,16 +116,20 @@ export function HomeSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <button className="group relative px-8 py-4 rounded-full font-bold text-lg shadow-2xl shadow-primary/20 hover:shadow-primary/40 hover:scale-105 transition-all duration-300 overflow-hidden bg-foreground text-background">
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group relative px-8 py-4 rounded-full font-bold text-lg shadow-2xl shadow-primary/20 hover:shadow-primary/40 hover:scale-105 transition-all duration-300 overflow-hidden bg-foreground text-background">
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] animate-gradient opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="relative flex items-center gap-2 group-hover:text-white transition-colors">
                 Start Your Project
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
-            <a href="#services" className="px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 font-bold text-lg hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 text-foreground">
+            <button
+              onClick={() => navigate('/services')}
+              className="px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 font-bold text-lg hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 text-foreground">
               Explore Services
-            </a>
+            </button>
           </motion.div>
         </div>
 

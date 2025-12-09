@@ -8,7 +8,7 @@ import {
 
 const FloatingElement = ({ delay, duration, x, y }: { delay: number; duration: number; x: [number, number]; y: [number, number] }) => (
   <motion.div
-    className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-400/40 to-purple-400/40"
+    className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-primary/40 to-secondary/40"
     animate={{ x, y }}
     transition={{ delay, duration, repeat: Infinity, ease: 'easeInOut' }}
   />
@@ -49,7 +49,7 @@ const Counter = ({ value, label, suffix = "" }: { value: string, label: string, 
         initial={{ scale: 0.5, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 1 } : {}}
         transition={{ type: "spring", stiffness: 100 }}
-        className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-purple-600 mb-2 group-hover:scale-110 transition-transform duration-300"
+        className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-2 group-hover:scale-110 transition-transform duration-300"
       >
         {value}{suffix}
       </motion.div>
@@ -173,7 +173,7 @@ export default function AboutUsPage() {
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white leading-[1.1] mb-8 tracking-tight">
               We Don't Just <br /> Build Brands. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 animate-gradient bg-300%">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary animate-gradient bg-300%">
                 We Build Empires.
               </span>
             </h1>
@@ -228,7 +228,7 @@ export default function AboutUsPage() {
         <div className="max-w-5xl mx-auto">
           <SectionHeading
             subtitle="Our Journey"
-            title={<>From Humble Beginnings to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Global Impact</span></>}
+            title={<>From Humble Beginnings to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Global Impact</span></>}
           />
 
           <div className="relative mt-20">
@@ -361,7 +361,7 @@ export default function AboutUsPage() {
             </motion.div>
 
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[2.5rem] blur-2xl opacity-50 animate-pulse" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-[2.5rem] blur-2xl opacity-50 animate-pulse" />
               <div className="relative bg-slate-800 rounded-[2rem] p-8 border border-slate-700 shadow-2xl">
                 <div className="grid grid-cols-2 gap-6">
                   {[
@@ -389,7 +389,7 @@ export default function AboutUsPage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-blue-600 to-purple-600 p-12 md:p-24 text-center text-white shadow-2xl"
+            className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-primary to-secondary p-12 md:p-24 text-center text-white shadow-2xl"
           >
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
