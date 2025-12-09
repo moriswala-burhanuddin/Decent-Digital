@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Send, Check, Sparkles, Zap, Shield, Clock } from '
 import { useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { projectsApi } from '../services/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -23,23 +24,10 @@ export default function Contact() {
     const toastId = toast.loading('Sending message...');
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        toast.success("Message sent successfully!", { id: toastId });
-        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-        setErrors({});
-      } else {
-        toast.error("Error: " + JSON.stringify(result), { id: toastId });
-      }
+      await projectsApi.submitContact(formData);
+      toast.success("Message sent successfully!", { id: toastId });
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      setErrors({});
 
     } catch (err) {
       console.error(err);

@@ -47,7 +47,6 @@ export const projectsApi = {
       throw error;
     }
   },
-},
 
   // Submit contact form
   submitContact: async (data: any) => {
