@@ -47,4 +47,26 @@ export const projectsApi = {
       throw error;
     }
   },
+},
+
+  // Submit contact form
+  submitContact: async (data: any) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/contact/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(JSON.stringify(result));
+      }
+      return result;
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      throw error;
+    }
+  },
 };
