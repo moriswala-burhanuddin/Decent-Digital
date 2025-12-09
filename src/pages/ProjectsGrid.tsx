@@ -2,6 +2,7 @@ import { Star, Sparkles, ArrowLeft, ArrowRight, Github } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { projectsApi } from '../services/api';
 
 const STATIC_PROJECTS = [
   {
@@ -73,10 +74,9 @@ export default function ProjectsGrid() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/projects/')
-      .then(res => res.json())
+    projectsApi.getAllProjects()
       .then(data => {
-        const list = Array.isArray(data) ? data : data.results;
+        const list = Array.isArray(data) ? data : (data as any).results;
 
         if (!list) {
           console.error("Invalid API response:", data);
@@ -89,16 +89,14 @@ export default function ProjectsGrid() {
           title: item.title,
           category: item.category,
           description: item.description,
-          image: item.image?.startsWith("http")
-            ? item.image
-            : `http://127.0.0.1:8000${item.image}`,
+          image: item.image,
           tags: item.tags || [],
           rating: 5
         }));
 
         setProjects([...STATIC_PROJECTS, ...djangoProjects]);
       })
-      .catch(err => console.error("Django API error:", err));
+      .catch(err => console.error("API error:", err));
   }, []);
 
   const filteredProjects = activeCategory === 'All'

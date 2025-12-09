@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, FileText, Briefcase, Layers, Zap, Command, Hash } from 'lucide-react';
+import { projectsApi } from '../services/api';
 import { services } from './Services';
 import { STATIC_PROJECTS } from './Projects';
 import { blogPosts } from '../pages/Blog';
@@ -29,9 +30,11 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
     // Fetch Django Projects
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/projects/')
-            .then(res => res.json())
-            .then(data => setDjangoProjects(data))
+        projectsApi.getAllProjects()
+            .then(data => {
+                const list = Array.isArray(data) ? data : (data as any).results;
+                setDjangoProjects(list || [])
+            })
             .catch(err => console.error('Failed to fetch projects:', err));
     }, []);
 
