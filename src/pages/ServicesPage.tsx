@@ -86,7 +86,6 @@ export default function ServicesPage() {
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-background/90 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
-          {/* Removed heavy noise SVG overlay for performance */}
         </div>
 
         <div className="relative z-10 container mx-auto px-6 text-center">

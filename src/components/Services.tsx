@@ -84,15 +84,16 @@ function ServiceCard({ service, isActive }: { service: typeof services[0]; isAct
         transform: 'translateZ(0)',
       }}
     >
-      {/* Card Background - Optimized Glass */}
-      <div className="absolute inset-0 transition-colors duration-500
-        bg-white/90 dark:bg-slate-900/90
+      {/* Card Background - Performance Optimized (High Opacity instead of Blur) */}
+      <div className={`absolute inset-0 transition-colors duration-500
+        bg-white/95 dark:bg-slate-900/95 
         border border-white/40 dark:border-white/10
-        ${isActive ? 'border-t-white/60 dark:border-t-white/20' : ''}
-      " />
+        ${isActive ? 'border-t-white/60 dark:border-t-white/30' : ''}
+      `} />
 
       {/* Dynamic Gradient Tint */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-[0.03] dark:opacity-[0.15] group-hover:opacity-[0.08] dark:group-hover:opacity-[0.25] transition-opacity duration-500`} />
+      {/* Dynamic Gradient Tint - Increased opacity for visibility in light mode */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-10 dark:opacity-20 group-hover:opacity-15 dark:group-hover:opacity-30 transition-opacity duration-500`} />
 
       <div className="relative h-full p-8 flex flex-col justify-end z-10">
         <service.icon className={`absolute top-8 right-8 w-40 h-40 opacity-[0.03] dark:opacity-[0.05] ${service.textColor} rotate-12 group-hover:rotate-0 transition-all duration-700 ease-out pointer-events-none`} />
@@ -167,8 +168,8 @@ export default function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }} // Faster transition
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[3xl] opacity-20 dark:opacity-20 will-change-transform" // Reduced blur and opacity, hardware acceleration
+            transition={{ duration: 0.5 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[60px] opacity-40 dark:opacity-20 will-change-transform"
             style={{ backgroundColor: currentService.color }}
           />
         </AnimatePresence>

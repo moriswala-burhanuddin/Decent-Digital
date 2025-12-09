@@ -41,27 +41,26 @@ export function HomeSection() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
         {/* Geometric Shapes */}
+        {/* Geometric Shapes - Static Opacity for Performance */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 left-[10%] w-20 h-20 border-2 border-primary/20 rounded-2xl opacity-20"
+          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+          className="absolute top-20 left-[10%] w-20 h-20 border-2 border-primary/10 rounded-2xl opacity-30 will-change-transform"
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-40 right-[10%] w-32 h-32 border border-secondary/20 rounded-full opacity-20"
+          className="absolute bottom-40 right-[10%] w-32 h-32 border border-secondary/10 rounded-full opacity-30 will-change-transform"
         />
 
-        {/* Optimized Blobs - Reduced blur and removed mix-blend-screen for performance */}
+        {/* Performance Blobs - No Blend Modes, Simple Opacity */}
         <motion.div
           style={{ y }}
-          className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[3xl] animate-pulse will-change-transform"
+          className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[80px] will-change-transform"
         />
-        <div
-          className="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[3xl]"
-        />
-        <div
-          className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-accent-purple/5 rounded-full blur-[3xl]"
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "20%"]) }}
+          className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-secondary/20 rounded-full blur-[80px] will-change-transform"
         />
       </div>
 
