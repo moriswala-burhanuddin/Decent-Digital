@@ -74,10 +74,10 @@ export function HomeSection() {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+      <div className="relative z-10 container mx-auto px-4 pt-32 pb-0">
 
         {/* Hero Content */}
-        <div className="text-center max-w-6xl mx-auto mb-32">
+        <div className="text-center max-w-6xl mx-auto mb-20 ">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -94,14 +94,14 @@ export function HomeSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-6xl sm:text-7xl lg:text-9xl font-heading font-bold leading-[0.9] mb-8 tracking-tight"
+            className="text-6xl sm:text-7xl lg:text-9xl font-heading font-bold leading-[0.9] mb-8 tracking-tight "
           >
-            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/40">
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/40 ">
               We Craft
             </span>
             <br />
             <span className="relative inline-block">
-              <span className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-accent-purple opacity-20 blur-2xl rounded-full" />
+              <span className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-accent-purple opacity-20 blur-2xl rounded-full " />
               <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent-purple animate-gradient bg-[length:200%_auto]">
                 Digital Reality
               </span>
@@ -139,32 +139,52 @@ export function HomeSection() {
         </div>
 
         {/* Services Slider (Marquee) */}
-        <div className="mb-32 relative">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute inset-y-0  bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="mb-24 relative w-screen left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
 
-          <div className="flex overflow-hidden py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex overflow-hidden py-10">
             <motion.div
-              className="flex gap-6 px-6 will-change-transform"
+              className="flex gap-8 px-8 will-change-transform"
               animate={{ x: "-50%" }}
               transition={{
-                duration: 30,
+                duration: 40,
                 repeat: Infinity,
                 ease: "linear",
                 repeatType: "loop"
               }}
             >
-              {[...services, ...services, ...services].map((srv, idx) => (
+              {[...services, ...services, ...services, ...services].map((srv, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center gap-4 px-8 py-4 rounded-2xl bg-white/50 dark:bg-white/5 backdrop-blur-md border border-black/5 dark:border-white/5 hover:border-primary/40 transition-all group min-w-[240px]"
+                  className="flex-shrink-0 relative group min-w-[320px]"
                 >
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${srv.gradient} shadow-lg dark:shadow-none`}>
-                    <srv.icon className="w-5 h-5 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="relative flex items-center gap-6 px-8 py-6 rounded-2xl 
+                    bg-white/80 dark:bg-white/5 
+                    backdrop-blur-xl 
+                    border border-slate-200 dark:border-white/5 
+                    hover:border-primary/20 dark:hover:border-white/20 
+                    transition-all duration-300 
+                    group-hover:-translate-y-2 
+                    shadow-sm group-hover:shadow-xl dark:shadow-none dark:group-hover:shadow-[0_20px_40px_-15px_rgba(255,255,255,0.05)]"
+                  >
+                    <div className={`
+                      flex items-center justify-center w-14 h-14 rounded-xl 
+                      bg-gradient-to-br ${srv.gradient} 
+                      shadow-lg shadow-black/5 dark:shadow-black/20 group-hover:scale-110 transition-transform duration-500
+                    `}>
+                      <srv.icon className="w-7 h-7 text-white" />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="font-heading font-bold text-xl text-slate-900 dark:text-gray-100 group-hover:text-primary transition-colors">
+                        {srv.title}
+                      </span>
+                      <span className="text-sm text-slate-500 dark:text-gray-400 font-medium">
+                        Explore Service
+                      </span>
+                    </div>
                   </div>
-                  <span className="font-bold text-lg text-foreground/80 group-hover:text-foreground transition-colors">
-                    {srv.title}
-                  </span>
                 </div>
               ))}
             </motion.div>
@@ -190,14 +210,14 @@ export function HomeSection() {
         </div>
 
         {/* Detailed Services Grid */}
-        <div id="services" className="mb-32">
-          <div className="text-center mb-20">
+        <div id="services" className="mb-12">
+          <div className="text-center mb-12">
             <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our Expertise</span>
             <h2 className="text-4xl sm:text-6xl font-heading font-bold mb-6">Comprehensive Digital Services</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">We provide end-to-end solutions to help your business thrive in the digital age.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             <motion.div whileHover={{ y: -5 }} className="group">
               <BrandingFrame />
             </motion.div>

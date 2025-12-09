@@ -15,6 +15,10 @@ import BlogDetail from './pages/BlogDetail';
 import AboutUsPage from './pages/AboutUsPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
 
+import PrivacyPolicy from './pages/PrivacyPolicy.tsx';
+import TermsOfService from './pages/TermsOfService.tsx';
+import CookiePolicy from './pages/CookiePolicy.tsx';
+
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import ProjectsGrid from './pages/ProjectsGrid.tsx';
@@ -53,6 +57,9 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
             </Route>
           </Routes>
         </Router>

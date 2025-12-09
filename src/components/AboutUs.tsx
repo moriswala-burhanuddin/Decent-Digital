@@ -37,7 +37,7 @@ export default function AboutUs() {
   return (
     <section id="about" className="relative py-32 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300">
       {/* Subtle Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:84px_84px]" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -119,14 +119,10 @@ export default function AboutUs() {
             transition={{ delay: 0.2 }}
             className="md:col-span-1 bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center"
           >
-            <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-slate-100 dark:border-slate-800">
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400"
-                alt="Founder"
-                className="w-full h-full object-cover"
-              />
+            <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-slate-100 dark:border-slate-800 flex items-center justify-center bg-slate-50 dark:bg-slate-800">
+              <Users className="w-16 h-16 text-slate-400" />
             </div>
-            <h4 className="text-xl font-bold text-slate-900 dark:text-white">James Anderson</h4>
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white">Hatim Moriswala</h4>
             <p className="text-sm text-blue-600 dark:text-blue-400 font-semibold mb-4">Founder & CEO</p>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               "We believe in the power of digital transformation to elevate businesses."

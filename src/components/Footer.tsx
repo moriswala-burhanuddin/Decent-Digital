@@ -1,8 +1,25 @@
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+
+  const handleServiceClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    navigate(`/service/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const services = [
+    { name: 'Brand Identity', id: 'brand-identity' },
+    { name: 'Web Development', id: 'web-development' },
+    { name: 'Digital Marketing', id: 'digital-marketing' },
+    { name: 'Social Media', id: 'social-media' },
+    { name: 'Custom Solutions', id: 'custom-solutions' },
+    { name: 'Business Growth', id: 'business-growth' }
+  ];
 
   return (
     <footer className="bg-gray-100 dark:bg-dark-lighter pt-16 pb-8 border-t border-gray-200 dark:border-white/10 transition-colors duration-300">
@@ -44,11 +61,15 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-heading font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Services</h4>
             <ul className="space-y-3">
-              {['Brand Identity', 'Web Development', 'Digital Marketing', 'Social Media', 'Custom Solutions', 'Business Growth'].map((service) => (
-                <li key={service}>
-                  <a href="#services" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group">
+              {services.map((service) => (
+                <li key={service.id}>
+                  <a
+                    href={`/service/${service.id}`}
+                    onClick={(e) => handleServiceClick(e, service.id)}
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group cursor-pointer"
+                  >
                     <span className="w-1.5 h-1.5 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span>{service}</span>
+                    <span>{service.name}</span>
                   </a>
                 </li>
               ))}
@@ -58,12 +79,25 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-heading font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Quick Links</h4>
             <ul className="space-y-3">
-              {['About Us', 'Our Work', 'Pricing', 'Testimonials', 'Blog', 'Careers'].map((link) => (
-                <li key={link}>
-                  <a href={link === 'Testimonials' ? '#testimonials' : '#'} className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span>{link}</span>
-                  </a>
+              {[
+                { name: 'About Us', path: '/about' },
+                { name: 'Our Work', path: '/projects' },
+                { name: 'Testimonials', path: '/#testimonials' },
+                { name: 'Blog', path: '/blog' },
+                { name: 'Careers', path: '/careers' }
+              ].map((link) => (
+                <li key={link.name}>
+                  {link.path.startsWith('/#') ? (
+                    <a href={link.path} className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <span>{link.name}</span>
+                    </a>
+                  ) : (
+                    <Link to={link.path} className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300 flex items-center space-x-2 group">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <span>{link.name}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -101,15 +135,15 @@ export default function Footer() {
               © {currentYear} Decent Digital. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
+              <Link to="/privacy-policy" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
+              </Link>
+              <Link to="/terms-of-service" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
                 Terms of Service
-              </a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
+              </Link>
+              <Link to="/cookie-policy" className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-300">
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>

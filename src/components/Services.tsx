@@ -1,7 +1,7 @@
 import React from 'react';
 import { Palette, Globe, TrendingUp, Megaphone, Code, Rocket, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const services = [
   {
@@ -11,11 +11,9 @@ export const services = [
     description: 'Create a unique and memorable brand identity that resonates with your target audience.',
     features: ['Logo Design', 'Visual Identity', 'Brand Guidelines'],
     gradient: 'from-pink-500 to-rose-500',
-    lightHex: '#ffe4e6',
-    darkHex: '#1f0510',
+    color: '#ec4899', // pink-500
     textColor: 'text-rose-600 dark:text-rose-400',
     descColor: 'text-rose-950/80 dark:text-rose-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-1'
   },
   {
     id: 'web-development',
@@ -24,11 +22,9 @@ export const services = [
     description: 'Build modern, responsive, and high-performance websites that deliver exceptional experiences.',
     features: ['React & Next.js', '3D Interactions', 'Performance First'],
     gradient: 'from-violet-500 to-purple-500',
-    lightHex: '#f3e8ff',
-    darkHex: '#10051f',
+    color: '#8b5cf6', // violet-500
     textColor: 'text-purple-600 dark:text-purple-400',
     descColor: 'text-purple-950/80 dark:text-purple-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-2'
   },
   {
     id: 'digital-marketing',
@@ -37,11 +33,9 @@ export const services = [
     description: 'Drive growth with data-driven marketing strategies that increase visibility and conversions.',
     features: ['SEO Strategy', 'Analytics', 'ROI Tracking'],
     gradient: 'from-blue-500 to-cyan-500',
-    lightHex: '#dbeafe',
-    darkHex: '#020617',
+    color: '#3b82f6', // blue-500
     textColor: 'text-blue-600 dark:text-blue-400',
     descColor: 'text-blue-950/80 dark:text-blue-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-2'
   },
   {
     id: 'social-media',
@@ -50,11 +44,9 @@ export const services = [
     description: 'Build and engage your community with compelling social media strategies.',
     features: ['Content Creation', 'Community Growth', 'Viral Campaigns'],
     gradient: 'from-amber-500 to-orange-500',
-    lightHex: '#ffedd5',
-    darkHex: '#1f0f05',
+    color: '#f59e0b', // amber-500
     textColor: 'text-orange-600 dark:text-orange-400',
     descColor: 'text-orange-950/80 dark:text-orange-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-1'
   },
   {
     id: 'custom-solutions',
@@ -63,11 +55,9 @@ export const services = [
     description: 'Develop tailored digital solutions that address your unique business challenges.',
     features: ['Web Apps', 'Automation', 'Cloud Architecture'],
     gradient: 'from-emerald-500 to-green-500',
-    lightHex: '#d1fae5',
-    darkHex: '#021f12',
+    color: '#10b981', // emerald-500
     textColor: 'text-emerald-600 dark:text-emerald-400',
     descColor: 'text-emerald-950/80 dark:text-emerald-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-1'
   },
   {
     id: 'business-growth',
@@ -76,57 +66,63 @@ export const services = [
     description: 'Comprehensive growth strategies that scale your business and maximize potential.',
     features: ['Consulting', 'Scaling Strategy', 'Market Analysis'],
     gradient: 'from-indigo-500 to-blue-600',
-    lightHex: '#e0e7ff',
-    darkHex: '#0b0a1f',
+    color: '#6366f1', // indigo-500
     textColor: 'text-indigo-600 dark:text-indigo-400',
     descColor: 'text-indigo-950/80 dark:text-indigo-100/90',
-    colSpan: 'md:col-span-2 lg:col-span-2'
   }
 ];
 
 function ServiceCard({ service, isActive }: { service: typeof services[0]; isActive: boolean }) {
   return (
     <motion.div
-      className={`group relative h-full w-full bg-slate-900 border ${isActive ? 'border-white/20 shadow-2xl scale-[1.02]' : 'border-transparent scale-100'} transition-all duration-700 ease-out`}
+      className={`group relative h-full w-full overflow-hidden transition-all duration-700 ease-out ${isActive
+        ? 'scale-[1.02] shadow-2xl dark:shadow-glow'
+        : 'scale-100 opacity-60 hover:opacity-100'
+        }`}
       style={{
         borderRadius: '2.5rem',
-        overflow: 'hidden',
         transform: 'translateZ(0)',
-        maskImage: 'radial-gradient(white, black)',
-        WebkitMaskImage: '-webkit-radial-gradient(white, black)',
       }}
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-90 group-hover:opacity-100 transition-opacity duration-500`} />
+      {/* Card Background - Light: Clean Glass, Dark: Deep Glass */}
+      <div className={`absolute inset-0 transition-colors duration-500
+        bg-white/80 dark:bg-slate-900/90 backdrop-blur-2xl
+        border border-white/40 dark:border-white/10
+        ${isActive ? 'border-t-white/60 dark:border-t-white/20' : ''}
+      `} />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      {/* Dynamic Gradient Tint */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-[0.03] dark:opacity-[0.15] group-hover:opacity-[0.08] dark:group-hover:opacity-[0.25] transition-opacity duration-500`} />
 
       <div className="relative h-full p-8 flex flex-col justify-end z-10">
-        <service.icon className="absolute top-8 right-8 w-40 h-40 text-white/5 rotate-12 group-hover:rotate-0 transition-all duration-700 ease-out pointer-events-none" />
+        <service.icon className={`absolute top-8 right-8 w-40 h-40 opacity-[0.03] dark:opacity-[0.05] ${service.textColor} rotate-12 group-hover:rotate-0 transition-all duration-700 ease-out pointer-events-none`} />
 
-        <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-inner border border-white/20 group-hover:bg-white/20 transition-colors">
+        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg border border-white/50 dark:border-white/10 transition-colors duration-500
+          bg-gradient-to-br ${service.gradient}
+        `}>
           <service.icon className="w-8 h-8 text-white" />
         </div>
 
-        <h3 className="text-4xl font-bold text-white mb-4 leading-tight tracking-tight">
+        <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-tight tracking-tight">
           {service.title}
         </h3>
 
-        <p className="text-white/80 text-lg mb-8 leading-relaxed max-w-[90%] font-medium">
+        <p className="text-slate-600 dark:text-slate-300 text-lg mb-8 leading-relaxed max-w-[90%] font-medium">
           {service.description}
         </p>
 
         <div className="space-y-3 mb-8">
           {service.features.slice(0, 3).map((feature: string, idx: number) => (
             <div key={idx} className="flex items-center gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_white]" />
-              <span className="text-sm font-medium text-white/90 tracking-wide">
+              <div className={`w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-white/80`} />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-200 tracking-wide">
                 {feature}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center gap-3 text-white font-bold tracking-wider uppercase text-sm group-hover:gap-5 transition-all duration-300">
+        <div className="flex items-center gap-3 font-bold tracking-wider uppercase text-sm group-hover:gap-5 transition-all duration-300 text-slate-900 dark:text-white">
           <span>Explore</span>
           <ArrowRight className="w-4 h-4" />
         </div>
@@ -158,16 +154,26 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-32 relative overflow-hidden transition-[background-color] duration-1000 ease-in-out z-10"
+      className="pt-16 pb-24 relative overflow-hidden bg-slate-50 dark:bg-black transition-colors duration-1000"
     >
-      <div className="absolute inset-0 transition-colors duration-1000 ease-in-out">
-        <div className="absolute inset-0 bg-slate-50 dark:hidden" style={{ backgroundColor: currentService.lightHex, transition: 'background-color 1s' }} />
-        <div className="absolute inset-0 hidden dark:block" style={{ backgroundColor: currentService.darkHex, transition: 'background-color 1s' }} />
+      {/* Ambient Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+        <AnimatePresence mode='wait'>
+          <motion.div
+            key={currentService.id}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.2 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[100px] opacity-20 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen"
+            style={{ backgroundColor: currentService.color }}
+          />
+        </AnimatePresence>
+
+        <div className="absolute inset-0 bg-slate-50/80 dark:bg-black/20 backdrop-blur-[1px]" />
       </div>
-
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_2px),linear-gradient(to_bottom,#80808012_1px,transparent_2px)] bg-[size:84px_84px]" />
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_100%_200px,rgba(255,255,255,0.4),transparent)] dark:bg-[radial-gradient(circle_800px_at_100%_200px,rgba(255,255,255,0.02),transparent)] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -178,23 +184,23 @@ export default function Services() {
           transition={{ duration: 0.7 }}
         >
           <motion.div
-            className={`inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-black/30 backdrop-blur-xl rounded-full border border-black/5 dark:border-white/10 mb-8 shadow-lg transition-colors duration-1000`}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-white/5 backdrop-blur-xl rounded-full border border-slate-200 dark:border-white/10 mb-8 shadow-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <Sparkles className={`w-4 h-4 ${currentService.textColor} transition-colors duration-1000`} />
-            <span className={`text-sm font-bold ${currentService.textColor} transition-colors duration-1000`}>
+            <Sparkles className={`w-4 h-4 ${currentService.textColor} transition-colors duration-500`} />
+            <span className={`text-sm font-bold ${currentService.textColor} transition-colors duration-500`}>
               Our Expertise
             </span>
           </motion.div>
 
-          <h2 className={`text-5xl md:text-6xl font-bold mb-6 tracking-tight transition-colors duration-1000 ${currentService.textColor}`}>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-slate-900 dark:text-white">
             Digital Solutions for <br />
-            <span className="opacity-80">
+            <span className={`transition-colors duration-500 ${currentService.textColor} opacity-90`}>
               Modern Businesses
             </span>
           </h2>
 
-          <p className={`text-xl max-w-2xl mx-auto leading-relaxed transition-colors duration-1000 font-medium ${currentService.descColor}`}>
+          <p className="text-xl max-w-2xl mx-auto leading-relaxed font-medium text-slate-600 dark:text-slate-400">
             We combine creativity with technical excellence to deliver digital products that drive real business growth.
           </p>
         </motion.div>
@@ -221,8 +227,8 @@ export default function Services() {
             const serviceIndex = (index % services.length + services.length) % services.length;
             const service = services[serviceIndex];
 
-            const ANGLE_STEP = 20;
-            const RADIUS = 1200;
+            const ANGLE_STEP = 18;
+            const RADIUS = 800; // Adjusted for better screen fit
 
             const angleRad = (offset * ANGLE_STEP * Math.PI) / 180;
             const x = RADIUS * Math.sin(angleRad);
@@ -231,19 +237,19 @@ export default function Services() {
 
             const isCenter = offset === 0;
 
-            const scale = isCenter ? 1 : 0.95;
-            const opacity = isCenter ? 1 : Math.max(0.5 - Math.abs(offset) * 0.1, 0.2);
+            const scale = isCenter ? 1 : 0.9;
+            const opacity = isCenter ? 1 : Math.max(0.4 - Math.abs(offset) * 0.1, 0.1);
             const zIndex = 100 - Math.abs(offset);
 
             return (
               <motion.div
                 key={`${index}-${service.id}`}
-                className="absolute top-1/2 left-1/2 w-[300px] md:w-[400px] h-[500px] md:h-[550px]"
+                className="absolute top-1/2 left-1/2 w-[320px] md:w-[400px] h-[520px] md:h-[580px]"
                 initial={false}
                 animate={{
                   x: `calc(-50% + ${x}px)`,
                   y: '-50%',
-                  z: isCenter ? 50 : z,
+                  z: isCenter ? 100 : z,
                   rotateY: rotateY,
                   scale: scale,
                   opacity: opacity,
@@ -258,33 +264,29 @@ export default function Services() {
                   else setActiveIndex(index);
                 }}
               >
-                <motion.div
-                  className="h-full w-full"
-                  animate={isCenter ? { y: [0, -10, 0] } : {}}
-                  transition={isCenter ? { repeat: Infinity, duration: 4, ease: "easeInOut" } : {}}
-                >
+                <div className="h-full w-full">
                   <ServiceCard service={service} isActive={isCenter} />
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
 
           <button
             onClick={() => setActiveIndex(prev => prev - 1)}
-            className="cursor-pointer absolute left-[2%] md:left-[10%] top-1/2 -translate-y-1/2 z-[100] p-2 md:p-4 rounded-full bg-black/20 hover:bg-black/40 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all hover:scale-110 active:scale-95 group shadow-xl"
+            className="cursor-pointer absolute left-[2%] md:left-[10%] top-1/2 -translate-y-1/2 z-[100] p-3 md:p-4 rounded-full bg-white/50 dark:bg-white/5 hover:bg-white dark:hover:bg-white/20 backdrop-blur-md border border-slate-200 dark:border-white/10 transition-all hover:scale-110 active:scale-95 group shadow-lg"
           >
-            <ArrowRight className="w-5 h-5 md:w-8 md:h-8 rotate-180 text-white group-hover:text-blue-400 transition-colors" />
+            <ArrowRight className="w-6 h-6 rotate-180 text-slate-800 dark:text-white" />
           </button>
 
           <button
             onClick={() => setActiveIndex(prev => prev + 1)}
-            className="cursor-pointer absolute right-[2%] md:right-[10%] top-1/2 -translate-y-1/2 z-[100] p-2 md:p-4 rounded-full bg-black/20 hover:bg-black/40 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all hover:scale-110 active:scale-95 group shadow-xl"
+            className="cursor-pointer absolute right-[2%] md:right-[10%] top-1/2 -translate-y-1/2 z-[100] p-3 md:p-4 rounded-full bg-white/50 dark:bg-white/5 hover:bg-white dark:hover:bg-white/20 backdrop-blur-md border border-slate-200 dark:border-white/10 transition-all hover:scale-110 active:scale-95 group shadow-lg"
           >
-            <ArrowRight className="w-5 h-5 md:w-8 md:h-8 text-white group-hover:text-blue-400 transition-colors" />
+            <ArrowRight className="w-6 h-6 text-slate-800 dark:text-white" />
           </button>
         </div>
 
-        <div className="flex justify-center gap-3 mt-4 md:mt-12 relative z-[100] pointer-events-auto">
+        <div className="flex justify-center gap-3 mt-8 relative z-[100] pointer-events-auto">
           {services.map((_, idx) => {
             const currentActive = (activeIndex % services.length + services.length) % services.length;
             const isActive = currentActive === idx;
@@ -295,7 +297,10 @@ export default function Services() {
                   const distance = idx - currentActive;
                   setActiveIndex(prev => prev + distance);
                 }}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer shadow-sm ${isActive ? 'bg-white w-8' : 'bg-white/40 w-2 hover:bg-white/60'}`}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${isActive
+                  ? 'bg-slate-900 dark:bg-white w-8'
+                  : 'bg-slate-300 dark:bg-white/20 w-1.5 hover:bg-slate-400 dark:hover:bg-white/40'
+                  }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             );

@@ -10,7 +10,7 @@ export default function ContactPage() {
             exit={{ opacity: 0 }}
             className="relative min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300"
         >
-            {/* Hero Section */}
+            {/* Hero Section
             <section className="relative pt-32 pb-12 px-6 overflow-hidden">
                 <ParticlesBackground />
                 <div className="absolute inset-0 pointer-events-none">
@@ -36,7 +36,7 @@ export default function ContactPage() {
                         Have a project in mind? We'd love to hear from you. Let's build something amazing together.
                     </motion.p>
                 </div>
-            </section>
+            </section> */}
 
             <Contact />
         </motion.div>

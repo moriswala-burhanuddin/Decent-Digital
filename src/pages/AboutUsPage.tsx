@@ -3,7 +3,7 @@ import { motion, useScroll, useSpring, useInView } from 'framer-motion';
 import {
   Target, Globe, Sparkles,
   ArrowRight, CheckCircle2, Linkedin, Twitter,
-  ChevronDown, Play, Heart
+  ChevronDown, Heart
 } from 'lucide-react';
 
 const FloatingElement = ({ delay, duration, x, y }: { delay: number; duration: number; x: [number, number]; y: [number, number] }) => (
@@ -195,14 +195,7 @@ export default function AboutUsPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/10 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-white/20 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center gap-2"
-              >
-                <Play size={20} className="fill-current" />
-                Watch Our Reel
-              </motion.button>
+
             </div>
           </motion.div>
         </div>
@@ -211,7 +204,7 @@ export default function AboutUsPage() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400 flex flex-col items-center gap-2"
+          className="absolute bottom-10 left-0 w-full flex flex-col items-center gap-2 text-slate-400"
         >
           <span className="text-xs font-bold uppercase tracking-widest">Scroll</span>
           <ChevronDown className="w-6 h-6" />

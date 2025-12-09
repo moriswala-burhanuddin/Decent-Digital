@@ -65,8 +65,8 @@ export default function Header() {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-            ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm py-3'
-            : 'bg-transparent py-5'
+          ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm py-3'
+          : 'bg-transparent py-5'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,10 +78,8 @@ export default function Header() {
                 onClick={() => navigate('/')}
                 className="flex items-center gap-2 group"
               >
-                <div className="relative w-8 h-8 sm:w-10 sm:h-10 overflow-hidden rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 p-0.5">
-                  <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[7px] flex items-center justify-center">
-                    <img src="/logo.png" alt="Decent Digital" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
-                  </div>
+                <div className="relative w-8 h-8 sm:w-10 sm:h-10 overflow-hidden">
+                  <img src="/logo.png" alt="Decent Digital" className="w-full h-full object-contain" />
                 </div>
                 <span className={`text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-90'}`}>
                   Decent Digital
@@ -98,8 +96,8 @@ export default function Header() {
                     key={item.label}
                     onClick={() => handleNavClick(item.path)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${isActive
-                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                       }`}
                   >
                     {item.label}
@@ -190,8 +188,8 @@ export default function Header() {
                         key={item.label}
                         onClick={() => handleNavClick(item.path)}
                         className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-left transition-all duration-200 ${isActive
-                            ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold'
-                            : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white'
+                          ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold'
+                          : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white'
                           }`}
                       >
                         <span className="text-base">{item.label}</span>

@@ -4,16 +4,17 @@ import Footer from './Footer';
 import ProgressBar from './ProgressBar';
 import LoadingScreen from './LoadingScreen';
 import ScrollToTop from './ScrollToTop';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import Chatbot from './Chatbot';
 
 export default function Layout() {
     const { pathname } = useLocation();
+    const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 2.0,
+            duration: 1.2, // Slightly faster for better feel
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',
@@ -21,6 +22,8 @@ export default function Layout() {
             wheelMultiplier: 1,
             touchMultiplier: 2,
         });
+
+        lenisRef.current = lenis;
 
         function raf(time: number) {
             lenis.raf(time);
@@ -38,10 +41,13 @@ export default function Layout() {
     useEffect(() => {
         // Immediate scroll reset
         window.scrollTo(0, 0);
-
-        // Also try to reset via document element for broader browser support
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
+
+        // Reset Lenis scroll position
+        if (lenisRef.current) {
+            lenisRef.current.scrollTo(0, { immediate: true });
+        }
     }, [pathname]);
 
     return (
@@ -49,7 +55,7 @@ export default function Layout() {
             <LoadingScreen />
             <ProgressBar />
             <ScrollToTop />
-            <Chatbot />
+            {/* <Chatbot /> */}
             <Header />
             <main className="pt-20">
                 <Outlet />

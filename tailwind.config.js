@@ -80,12 +80,18 @@ export default {
           ring: "hsl(var(--sidebar-ring))"
         },
 
+
       },
 
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif']
-      },
+        heading: ['Outfit', 'sans-serif'],
+        myfont: ["ZenterSPD", "sans-serif"],
+        body: ["Astonpoliz", "sans-serif"],
+             
+          },
+        
+            
 
       animation: {
         blob: 'blob 7s infinite',

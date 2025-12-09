@@ -150,7 +150,7 @@ export default function Hero() {
             {/* Enhanced Headline */}
             <motion.div className="space-y-6" variants={itemVariants}>
               <div className="space-y-4">
-                <h1 className="font-heading text-5xl sm:text-6xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+                <h1 className="font-heading text-5xl sm:text-6xl md:text-6xl lg:text-[4.5rem] font-bold myfont leading-[1.05] tracking-tight">
                   <span className="block text-gray-900 dark:text-white mb-2 transition-colors duration-300">We Build</span>
                   <motion.span
                     className="relative inline-block"

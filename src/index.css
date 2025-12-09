@@ -148,7 +148,18 @@
     @apply font-heading font-bold;
   }
 }
-
+@font-face {
+  font-family: "ZenterSPD";
+  src: url("/src/assets/fonts/zenter-sp-demo-black.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Astonpoliz";
+  src: url("/src/assets/fonts/Astonpoliz.otf") format("OpenType");
+  font-weight: normal;
+  font-style: normal;
+}
 @layer utilities {
   .glass {
     @apply bg-white/70 dark:bg-dark-card backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-xl;
