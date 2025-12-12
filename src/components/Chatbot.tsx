@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Sparkles, Bot, ChevronRight, Loader2, Trash2, Volume2, VolumeX, ArrowDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Message {
     id: string;
@@ -77,52 +79,49 @@ export default function Chatbot() {
         setIsTyping(true);
         scrollToBottom();
 
-        // Simulate "Thinking" time based on message length
-        const thinkingTime = Math.max(1000, Math.min(3000, text.length * 50));
+        try {
+            const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+            const response = await fetch(`${API_BASE_URL}/chatbot/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: text }),
+            });
 
-        setTimeout(() => {
-            const botResponse = generateBotResponse(text);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to get response');
+            }
+
+            const botResponse: Message = {
+                id: (Date.now() + 1).toString(),
+                text: data.response,
+                sender: "bot",
+                timestamp: new Date(),
+            };
+
             setMessages((prev) => [...prev, botResponse]);
-            setIsTyping(false);
             if (isSoundOn) {
                 // Play sound logic here (placeholder)
             }
-        }, thinkingTime);
-    };
-
-    const generateBotResponse = (text: string): Message => {
-        const lowerText = text.toLowerCase();
-        let responseText = "I'm not sure about that, but our team would love to chat! You can reach us via the Contact page.";
-        let actions: { label: string; value: string }[] | undefined;
-
-        if (lowerText.includes("service") || lowerText.includes("offer") || lowerText.includes("do")) {
-            responseText = "We offer a wide range of premium digital services tailored to your needs.";
-            actions = [
-                { label: "Web Development", value: "/services" },
-                { label: "Mobile Apps", value: "/services" },
-                { label: "UI/UX Design", value: "/services" },
-            ];
-        } else if (lowerText.includes("project") || lowerText.includes("work") || lowerText.includes("portfolio")) {
-            responseText = "We've built some amazing things! Check out our latest case studies.";
-            actions = [{ label: "View Portfolio", value: "/projects" }];
-        } else if (lowerText.includes("contact") || lowerText.includes("email") || lowerText.includes("hire")) {
-            responseText = "Ready to start your journey? Let's connect!";
-            actions = [{ label: "Contact Us", value: "/contact" }];
-        } else if (lowerText.includes("price") || lowerText.includes("cost") || lowerText.includes("quote")) {
-            responseText = "Every project is unique. We provide custom quotes based on your specific requirements.";
-            actions = [{ label: "Get a Quote", value: "/contact" }];
-        } else if (lowerText.includes("hello") || lowerText.includes("hi")) {
-            responseText = "Hello! 👋 How can I assist you today?";
+        } catch (error) {
+            console.error('Chatbot error:', error);
+            const errorResponse: Message = {
+                id: (Date.now() + 1).toString(),
+                text: "I apologize, but I'm having trouble connecting to my brain right now. Please try again later.",
+                sender: "bot",
+                timestamp: new Date(),
+            };
+            setMessages((prev) => [...prev, errorResponse]);
+        } finally {
+            setIsTyping(false);
+            scrollToBottom();
         }
-
-        return {
-            id: (Date.now() + 1).toString(),
-            text: responseText,
-            sender: "bot",
-            timestamp: new Date(),
-            actions,
-        };
     };
+
+
 
     const handleActionClick = (action: { label: string; value: string }) => {
         if (action.value.startsWith("/")) {
@@ -194,6 +193,7 @@ export default function Chatbot() {
                         <div
                             ref={scrollContainerRef}
                             onScroll={handleScroll}
+                            data-lenis-prevent
                             className="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent"
                         >
                             {messages.length === 0 ? (
@@ -218,14 +218,33 @@ export default function Chatbot() {
 
                                             {/* Bubble */}
                                             <div
-                                                className={`rounded-2xl p-3.5 shadow-sm text-sm leading-relaxed ${msg.sender === "user"
-                                                        ? "bg-primary text-primary-foreground rounded-br-none"
-                                                        : "bg-muted/50 border border-border rounded-bl-none text-foreground"
+                                                className={`rounded-2xl p-4 shadow-sm text-sm leading-relaxed max-w-full overflow-hidden ${msg.sender === "user"
+                                                    ? "bg-primary text-primary-foreground rounded-br-none"
+                                                    : "bg-card border border-border/50 rounded-bl-none text-card-foreground shadow-sm"
                                                     }`}
                                             >
-                                                <p>{msg.text}</p>
+                                                <div className={`prose prose-sm max-w-none break-words ${msg.sender === "user"
+                                                    ? "prose-invert"
+                                                    : "dark:prose-invert prose-slate prose-p:leading-relaxed prose-pre:p-0 prose-pre:bg-transparent"
+                                                    }`}>
+                                                    <ReactMarkdown
+                                                        remarkPlugins={[remarkGfm]}
+                                                        components={{
+                                                            p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
+                                                            ul: ({ node, ...props }) => <ul className="my-2 space-y-1 list-disc list-inside" {...props} />,
+                                                            ol: ({ node, ...props }) => <ol className="my-2 space-y-1 list-decimal list-inside" {...props} />,
+                                                            li: ({ node, ...props }) => <li className="marker:text-current" {...props} />,
+                                                            a: ({ node, ...props }) => <a className="underline decoration-2 underline-offset-2 hover:opacity-80 transition-opacity font-medium" target="_blank" rel="noopener noreferrer" {...props} />,
+                                                            code: ({ node, className, children, ...props }) => {
+                                                                return <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-xs" {...props}>{children}</code>
+                                                            }
+                                                        }}
+                                                    >
+                                                        {msg.text}
+                                                    </ReactMarkdown>
+                                                </div>
                                                 {msg.actions && (
-                                                    <div className="mt-3 flex flex-wrap gap-2">
+                                                    <div className="mt-3 flex flex-wrap gap-2 not-prose">
                                                         {msg.actions.map((action, idx) => (
                                                             <button
                                                                 key={idx}

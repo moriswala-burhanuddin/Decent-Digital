@@ -55,7 +55,7 @@ export default function Layout() {
             <LoadingScreen />
             <ProgressBar />
             <ScrollToTop />
-            {/* <Chatbot /> */}
+            <Chatbot />
             <Header />
             <main className="pt-20">
                 <Outlet />

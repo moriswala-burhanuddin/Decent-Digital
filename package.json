@@ -11,15 +11,21 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@supabase/supabase-js": "^2.57.4",
     "@tanstack/react-query": "^5.90.11",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "framer-motion": "^12.23.24",
     "lenis": "^1.3.15",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.6",
+    "react-syntax-highlighter": "^16.1.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
     "toast": "^0.5.4",
     "toaster": "^0.1.2"
   },

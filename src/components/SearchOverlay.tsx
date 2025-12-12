@@ -179,7 +179,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                                 </div>
 
                                 {/* Results */}
-                                <div className="overflow-y-auto p-2">
+                                <div className="overflow-y-auto p-2" data-lenis-prevent>
                                     {results.length > 0 ? (
                                         <div className="space-y-1">
                                             {results.map((item, index) => (
