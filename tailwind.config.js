@@ -88,16 +88,17 @@ export default {
         heading: ['Outfit', 'sans-serif'],
         myfont: ["ZenterSPD", "sans-serif"],
         body: ["Astonpoliz", "sans-serif"],
-             
-          },
-        
-            
+
+      },
+
+
 
       animation: {
         blob: 'blob 7s infinite',
         'fade-in': 'fadeIn 0.5s ease-out forwards',
         'slide-up': 'slideUp 0.5s ease-out forwards',
-        'spin-slow': 'spin 3s linear infinite'
+        'spin-slow': 'spin 3s linear infinite',
+        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
 
       keyframes: {
