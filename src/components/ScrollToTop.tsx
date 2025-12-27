@@ -3,13 +3,36 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
+import { useLenis } from '../context/LenisContext';
+
 export default function ScrollToTop() {
   const { pathname } = useLocation();
   const [isVisible, setIsVisible] = useState(false);
+  // Safely attempt to get lenis context, though it should be available
+  let lenisContext;
+  try {
+    lenisContext = useLenis();
+  } catch (e) {
+    // Fallback if used outside provider (unlikely in this app structure)
+    lenisContext = { lenis: null };
+  }
+  const { lenis } = lenisContext;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Disable native scroll restoration to let us control it
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Timeout to ensure this runs after any transition/animation start
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+    }, 50); // Reduced timeout since we disabled restoration
+    return () => clearTimeout(timer);
+  }, [pathname, lenis]);
 
   useEffect(() => {
     const handleScroll = () => {

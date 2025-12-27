@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, FileText, Briefcase, Layers, Zap, Command, Hash } from 'lucide-react';
 import { projectsApi } from '../services/api';
 import { services } from './Services';
-import { blogPosts } from '../pages/Blog';
+import { blogPosts } from '../data/blogData';
 
 interface SearchOverlayProps {
     isOpen: boolean;

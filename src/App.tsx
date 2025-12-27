@@ -56,7 +56,7 @@ function App() {
               <Route path="/" element={<Home />} />
 
               <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:slug" element={<ServiceDetail />} />
+              <Route path="/service/:service" element={<ServiceDetail />} />
 
               <Route path="/projects" element={<ProjectsGrid />} />
               <Route path="/projects/:slug" element={<ProjectsDetail />} />
@@ -65,7 +65,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
 
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
 
               <Route path="/careers" element={<Careers />} />
 

@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { blogPosts } from "../pages/Blog"; // Import directly from Blog.tsx since data is there
+import { blogPosts } from "../data/blogData";
 import { Clock, User, ArrowLeft, Calendar, Share2, Bookmark } from "lucide-react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect } from "react";
