@@ -1,4 +1,5 @@
 import { Check, Star, Users, Award, ArrowRight, Shield } from 'lucide-react';
+import SEO from '../components/SEO';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLayoutEffect, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -25,6 +26,29 @@ export default function ServicesDetail() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+      <SEO
+        title={data.title}
+        description={data.description}
+        keywords={`${data.title}, ${data.tags?.join(', ')}, Decent Digital Services`}
+        image={data.image}
+        type="website"
+        schema={{
+          '@type': 'Service',
+          name: data.title,
+          description: data.description,
+          provider: {
+            '@type': 'Organization',
+            name: 'Decent Digital'
+          },
+          serviceType: data.title,
+          areaServed: 'IN',
+          offers: {
+            '@type': 'Offer',
+            price: data.price ? data.price.replace(/[^0-9]/g, '') : '0',
+            priceCurrency: 'INR'
+          }
+        }}
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 bg-slate-900 text-white">

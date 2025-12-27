@@ -1,4 +1,5 @@
 import { ArrowLeft, ExternalLink, Calendar, Users, CheckCircle2, Target, Lightbulb, ArrowRight } from 'lucide-react';
+import SEO from '../components/SEO';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -152,6 +153,24 @@ export default function ProjectsDetail() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <SEO
+        title={data.title}
+        description={data.description}
+        keywords={`${data.title}, ${data.tags?.join(', ')}, Case Study, Decent Digital Projects`}
+        image={data.image}
+        type="article"
+        schema={{
+          '@type': 'CreativeWork',
+          name: data.title,
+          author: {
+            '@type': 'Organization',
+            name: 'Decent Digital'
+          },
+          dateCreated: data.year,
+          description: data.description,
+          image: data.image
+        }}
+      />
 
       {/* Hero Section */}
       <div className="relative h-[70vh] min-h-[600px] w-full overflow-hidden">

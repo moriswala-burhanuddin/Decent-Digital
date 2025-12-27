@@ -1,8 +1,10 @@
 import React from 'react';
+import SEO from '../components/SEO';
 
 export default function PrivacyPolicy() {
     return (
         <div className="pt-32 pb-20 px-6 max-w-4xl mx-auto">
+            <SEO title="Privacy Policy" description="Privacy Policy of Decent Digital." />
             <h1 className="text-4xl font-bold mb-8 dark:text-white">Privacy Policy</h1>
             <div className="prose dark:prose-invert max-w-none">
                 <p>Last updated: {new Date().toLocaleDateString()}</p>

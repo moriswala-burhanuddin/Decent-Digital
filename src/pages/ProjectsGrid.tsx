@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { projectsApi } from '../services/api';
+import SEO from '../components/SEO';
 
 const STATIC_PROJECTS = [
   {
@@ -105,6 +106,11 @@ export default function ProjectsGrid() {
 
   return (
     <section className="min-h-screen py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden transition-colors duration-300">
+      <SEO
+        title="Our Projects"
+        description="View our portfolio of successful projects including e-commerce platforms, brand identity designs, and mobile applications."
+        keywords="Portfolio, Case Studies, Web Projects, Branding Projects, App Design Portfolio"
+      />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(147,51,234,0.08),transparent_50%)]" />
 
       <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-[60px] will-change-transform" />

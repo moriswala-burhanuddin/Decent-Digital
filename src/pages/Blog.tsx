@@ -2,6 +2,7 @@ import { Clock, User, ArrowRight, Search, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 import { blogPosts } from '../data/blogData';
 
@@ -22,6 +23,12 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <SEO
+        title="Blog & Insights"
+        description="Stay updated with the latest trends in web development, design, and digital marketing strategies."
+        keywords="Digital Marketing Blog, Web Design Trends, SEO Tips, Technology News"
+        type="website"
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">

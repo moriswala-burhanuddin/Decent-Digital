@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { blogPosts } from "../data/blogData";
 import { Clock, User, ArrowLeft, Calendar, Share2, Bookmark } from "lucide-react";
+import SEO from '../components/SEO';
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect } from "react";
 
@@ -33,6 +34,34 @@ export default function BlogDetail() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        keywords={`${post.category}, Blog, Decent Digital, ${post.title}`}
+        image={post.image}
+        type="article"
+        author={post.author}
+        publishedTime={post.date} // Assuming date format is compatible or needs parsing
+        schema={{
+          '@type': 'BlogPosting',
+          headline: post.title,
+          image: post.image,
+          author: {
+            '@type': 'Person',
+            name: post.author
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Decent Digital',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://digital.decentinstitute.in/logo.png'
+            }
+          },
+          datePublished: post.date, // Ideally YYYY-MM-DD
+          description: post.excerpt
+        }}
+      />
 
       {/* Reading Progress Bar */}
       <motion.div

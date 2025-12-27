@@ -1,5 +1,6 @@
 import Contact from '../components/Contact';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import ParticlesBackground from '../components/ParticlesBackground';
 
 export default function ContactPage() {

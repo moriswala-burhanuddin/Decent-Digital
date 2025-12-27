@@ -1,8 +1,10 @@
 import React from 'react';
+import SEO from '../components/SEO';
 
 export default function TermsOfService() {
     return (
         <div className="pt-32 pb-20 px-6 max-w-4xl mx-auto">
+            <SEO title="Terms of Service" description="Terms of Service for Decent Digital." />
             <h1 className="text-4xl font-bold mb-8 dark:text-white">Terms of Service</h1>
             <div className="prose dark:prose-invert max-w-none">
                 <p>Last updated: {new Date().toLocaleDateString()}</p>

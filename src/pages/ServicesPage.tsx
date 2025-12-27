@@ -12,6 +12,7 @@ import {
   Users,
   Sparkles
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const services = [
   {
@@ -81,6 +82,11 @@ export default function ServicesPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-background selection:bg-primary/30">
+      <SEO
+        title="Our Services"
+        description="Explore our comprehensive digital services including brand identity, web development, digital marketing, and custom software solutions."
+        keywords="Web Development Services, Branding Agency, Digital Marketing, Custom Software, Business Growth"
+      />
 
       {/* Hero Section - Performance Optimized */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">

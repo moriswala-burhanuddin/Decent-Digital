@@ -5,6 +5,7 @@ import {
   ArrowRight, CheckCircle2, Linkedin, Twitter,
   ChevronDown, Heart, User, Code2, Rocket, ShieldCheck
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const SectionHeading = ({ subtitle, title, align = "center" }: { subtitle: string, title: React.ReactNode, align?: "left" | "center" }) => (
   <div className={`mb-16 ${align === "center" ? "text-center" : "text-left"}`}>
@@ -112,6 +113,33 @@ export default function AboutUsPage() {
 
   return (
     <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden font-sans">
+      <SEO
+        title="About Us"
+        description="Learn about Decent Digital, a team of visionary creators and developers dedicated to transforming businesses through innovative digital solutions in Vadodara."
+        keywords="About Decent Digital, Web Design Team, Digital Agency Vadodara, Hatim Moriswala, Burhanuddin Moriswala"
+        schema={{
+          '@type': 'LocalBusiness',
+          name: 'Decent Digital',
+          description: 'Digital Agency in Vadodara offering web development and branding services.',
+          url: window.location.href,
+          telephone: '+919825754652',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'FF-12, Amber Complex, Ajwa Road',
+            addressLocality: 'Vadodara',
+            postalCode: '390019',
+            addressCountry: 'IN'
+          },
+          openingHoursSpecification: [
+            {
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+              opens: '09:00',
+              closes: '19:00'
+            }
+          ]
+        }}
+      />
       {/* Progress Bar - Matched to Theme (Indigo/Purple) */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 origin-left z-50"
