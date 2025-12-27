@@ -51,6 +51,7 @@ export default function Header() {
     { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
     { label: 'Projects', path: '/projects' },
+    { label: 'Blog', path: '/blog' },
     // { label: 'AI Editor', path: '/ai-editor' },
     // { label: 'Novaworks AI', path: '/novaworks-ai' },
     { label: 'About', path: '/about' },

@@ -95,14 +95,35 @@ export default function Chatbot() {
                 throw new Error(data.error || 'Failed to get response');
             }
 
-            const botResponse: Message = {
-                id: (Date.now() + 1).toString(),
-                text: data.response,
+            // Simulate typing effect
+            const fullResponse = data.response;
+            const responseId = (Date.now() + 1).toString();
+
+            // Add empty message first
+            setMessages((prev) => [...prev, {
+                id: responseId,
+                text: "",
                 sender: "bot",
                 timestamp: new Date(),
-            };
+            }]);
 
-            setMessages((prev) => [...prev, botResponse]);
+            // Split into words/chunks
+            const words = fullResponse.split(/(\s+)/);
+            let currentText = "";
+
+            for (let i = 0; i < words.length; i++) {
+                currentText += words[i];
+
+                // Update message text
+                setMessages((prev) => prev.map(msg =>
+                    msg.id === responseId ? { ...msg, text: currentText } : msg
+                ));
+                scrollToBottom(); // Auto-scroll as it types
+
+                // Random delay between words for realistic typing
+                await new Promise(resolve => setTimeout(resolve, 20 + Math.random() * 30));
+            }
+
             if (isSoundOn) {
                 // Play sound logic here (placeholder)
             }
